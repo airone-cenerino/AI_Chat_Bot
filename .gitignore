@@ -1,0 +1,14 @@
+/seq2seq_model/trained_model_data/*
+/seq2seq_model/database_dict_data/*
+/seq2seq_model/corpus_data/*
+/seq2seq_model/src/__pycache__/*
+!/seq2seq_model/corpus_data/sentence2wakati.py
+
+/TwitterCrawl/tweet/*
+/TwitterCrawl/__pycache__/*
+/TwitterCrawl/private_key.py
+
+/TwitterChatBot/src/private_key.py
+/TwitterChatBot/src/__pycache__/*
+/TwitterChatBot/dict_model_data/*
+/TwitterChatBot/src/since_id.pickle
