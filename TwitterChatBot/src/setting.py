@@ -1,5 +1,5 @@
 DATABASE_DICT_SAVE_FILE_NAME = "../dict_model_data/database_dict.tar"
-MODEL_SAVE_FILE_NAME = "../dict_model_data/20000_checkpoint.tar"
+MODEL_SAVE_FILE_NAME = "../dict_model_data/16000_checkpoint.tar"
 
 BOT_USER_NAME = 'cenerino_bot'
 BOT_SCREEN_NAME = '@' + BOT_USER_NAME
@@ -16,6 +16,6 @@ decoder_n_layers = 2
 dropout = 0.1
 
 # Attentionの設定 ※そんなに変わらないらしい
-attn_model = 'dot'
-#attn_model = 'general'
+#attn_model = 'dot'
+attn_model = 'general'
 #attn_model = 'concat'

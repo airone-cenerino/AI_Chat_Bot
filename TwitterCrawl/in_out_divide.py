@@ -1,8 +1,8 @@
 import MeCab
 import re, os
 
-inout_file_name = "私はtweet2020-04-12"   # 読み込むファイル名
-save_directory = "../seq2seq_model/corpus_data/分かち前/"   # 保存先directory
+inout_file_name = "ですよ！tweet2020-04-14"   # 読み込むファイル名
+save_directory = "../Preprocessing/before_preprocessing_data/"   # 保存先directory
 
 if not os.path.exists(save_directory):
     os.mkdir(save_directory)

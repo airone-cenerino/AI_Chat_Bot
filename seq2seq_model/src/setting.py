@@ -1,6 +1,6 @@
 import os
 
-model_name = 'chatbot_ver8.0'       # モデル名
+model_name = 'chatbot_ver10.0_general'       # モデル名
 
 
 """データベース・辞書作成"""
@@ -11,7 +11,8 @@ TRIMMED_WORD_MAX_OCCURENCE_NUM = 5  # 辞書から削除しない単語の最小
 MAX_SENTENCE_LENGTH = 20  # 1文の最大単語数 この値より長い文は使わない。
 
 # コーパスファイル名
-corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
+corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "です。tweet2020-04-13",
+                        "ですよ！tweet2020-04-13", "ですよ！tweet2020-04-14", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
 
 
 
@@ -19,7 +20,7 @@ corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10",
 save_dir = "../trained_model_data"  # 学習モデルのセーブディレクトリ。
 corpus_name = "meidai_and_twitter"         # コーパス名
 
-LOAD_MODEL_EPOCH_NUM = 20000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
+LOAD_MODEL_EPOCH_NUM = 16000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
 
 
 """学習モード----------------------------------------------------------------------------"""
@@ -41,9 +42,9 @@ decoder_learning_ratio = 5.0
 
 
 # Attentionの設定 ※そんなに変わらないらしい
-attn_model = 'dot'
-#attn_model = 'general'
-#attn_model = 'concat'
+#attn_model = 'dot'
+attn_model = 'general'
+#attn_model = 'concat'   # メモリオーバーしがち
 
 
 clip = 50.0 # gradient clipping
@@ -53,7 +54,7 @@ teacher_forcing_ratio = 1.0 # 教師強制
 
 
 # epoch, batch関連
-iteration_num = 50000       # エポック数
+iteration_num = 40000       # エポック数
 save_every = 2000           # エポック何回ごとにセーブするのか。
 print_every = 100           # エポック何回ごとに結果の表示をするのか。
 batch_size = 64             # バッチサイズ

@@ -12,3 +12,5 @@
 /TwitterChatBot/src/__pycache__/*
 /TwitterChatBot/dict_model_data/*
 /TwitterChatBot/src/since_id.pickle
+
+/Preprocessing/before_preprocessing_data/*

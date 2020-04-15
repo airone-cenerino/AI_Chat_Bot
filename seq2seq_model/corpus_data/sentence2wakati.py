@@ -1,7 +1,7 @@
 import MeCab
 
 
-file_name = "私はtweet2020-04-12"
+file_name = "ですよ！tweet2020-04-14"
 
 
 # 文を句構造解析して単語のリストを返す。
