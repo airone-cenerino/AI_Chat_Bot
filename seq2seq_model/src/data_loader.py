@@ -38,8 +38,8 @@ def trim_long_sentence(pairs):
 
 
 def get_trimmed_pairs(file_name):
-    input_file_name = file_name + "_分かち後_input.txt"
-    output_file_name = file_name + "_分かち後_output.txt"
+    input_file_name = file_name + "_preprocessed_input.txt"
+    output_file_name = file_name + "_preprocessed_output.txt"
 
     input = load_File(input_file_name)  # 文のリスト(分かち済み)
     output = load_File(output_file_name)

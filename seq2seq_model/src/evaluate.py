@@ -55,7 +55,7 @@ def evaluateInput(encoder, decoder, searcher, voc):
             #print(output_words)
             print('Bot:', end="")
             for word in output_words:
-                if word == "。" or word == "！" or word =="？":
+                if word == "。" or word == "！" or word =="？"or "。" in word:
                     print(word)
                     break
                 print(word, end="")

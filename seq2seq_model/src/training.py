@@ -97,10 +97,9 @@ def train_batch(input_variable, lengths, target_variable, mask, max_target_len, 
 # バッチでのトレーニングを指定回数イテレーションする。
 def trainIters(embedding, encoder, decoder, encoder_optimizer, decoder_optimizer, checkpoint, dict, pairs):
     print('モデルのトレーニングを開始します。')
-    print("バッチ作成中…")
 
     # iterationの回数だけバッチを作成する。
-    training_batches = [process_data.batch2TrainData(dict, [random.choice(pairs) for _ in range(setting.batch_size)]) for _ in range(setting.iteration_num)]
+    #training_batches = [process_data.batch2TrainData(dict, [random.choice(pairs) for _ in range(setting.batch_size)]) for _ in range(setting.iteration_num)]
 
     # 初期化
     start_iteration = 1
@@ -109,9 +108,9 @@ def trainIters(embedding, encoder, decoder, encoder_optimizer, decoder_optimizer
         start_iteration = checkpoint['iteration'] + 1
 
     # イテレーションループ
-    print("バッチ作成完了")
     for iteration in range(start_iteration, setting.iteration_num + 1):
-        training_batch = training_batches[iteration - 1]
+        #training_batch = training_batches[iteration - 1]
+        training_batch = process_data.batch2TrainData(dict, [random.choice(pairs) for _ in range(setting.batch_size)])
         input_variable, lengths, target_variable, mask, max_target_len = training_batch        # トレーニング用データの展開
 
         # バッチを入力としてトレーニング

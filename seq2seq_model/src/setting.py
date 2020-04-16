@@ -1,6 +1,6 @@
 import os
 
-model_name = 'chatbot_ver10.0_general'       # モデル名
+model_name = 'chatbot_ver11.0_general_pre追加'       # モデル名
 
 
 """データベース・辞書作成"""
@@ -20,11 +20,11 @@ corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10",
 save_dir = "../trained_model_data"  # 学習モデルのセーブディレクトリ。
 corpus_name = "meidai_and_twitter"         # コーパス名
 
-LOAD_MODEL_EPOCH_NUM = 16000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
+LOAD_MODEL_EPOCH_NUM = 80000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
 
 
 """学習モード----------------------------------------------------------------------------"""
-IS_TRAIN_FROM_THE_MIDDLE = False     # 以前の続きから学習を再開するかどうか。
+IS_TRAIN_FROM_THE_MIDDLE = True     # 以前の続きから学習を再開するかどうか。
 
 
 
@@ -54,10 +54,10 @@ teacher_forcing_ratio = 1.0 # 教師強制
 
 
 # epoch, batch関連
-iteration_num = 40000       # エポック数
+iteration_num = 120000       # エポック数
 save_every = 2000           # エポック何回ごとにセーブするのか。
 print_every = 100           # エポック何回ごとに結果の表示をするのか。
-batch_size = 64             # バッチサイズ
+batch_size = 32             # バッチサイズ
 
 
 
