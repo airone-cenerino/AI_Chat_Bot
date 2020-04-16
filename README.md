@@ -22,7 +22,7 @@ oath_key_dict = {
 
 3. `/TwitterCrawl/in_out_divide.py` の `inout_file_name` を適宜変更してから `/TwitterCrawl/in_out_divide.py` を実行する。
 
-4. `/seq2seq_model/corpus_data/sentence2wakati.py` の `file_name` を適宜変更してから実行して、分かち書きのコーパスデータを作成する。
+4. `/Preprocessing/preprocess_twitter_data.py` の `data_file_names` を適宜変更してから実行して、前処理を行う。
 
 5. `/seq2seq_model/src/setting.py` のデータベース・辞書作成に関する項目を設定してから、`/seq2seq_model/src/database_dict_main.py` を実行して、データベースと辞書を作成する。
 
@@ -32,12 +32,16 @@ oath_key_dict = {
 
 ---
 
+## Preprocessing
++ preprocess_twitter_data.py : Twitterから収集したリプライ対の前処理を行う。
++ preprocess_meidai_data.py : 名大会話コーパスの前処理を行う。
+
+---
+
 ## seq2seq_model
 コーパスデータを用いてseq2seqモデルの学習を行う。
 ### corpus_data
 コーパスデータの置き場所。
-  + 分かち前 : TwitterCrawl/in_out_divide.pyで生成されたファイルはここに保存される。
-  + sentence2wakati.py : 分かち前に格納されているデータを分かち書きの形式にしてcorpus_data配下に保存する。
 
 ---
 
