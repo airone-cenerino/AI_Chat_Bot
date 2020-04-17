@@ -35,6 +35,15 @@ def preprocess_sentence(input_sentence, output_sentence):
     input_sentence = input_sentence.split("。")[0] + "。"
     output_sentence = output_sentence.split("。")[0] + "。"
 
+    # 全角英数字を半角英数字に置き換え。
+    mydict = {chr(0xFF10 + i): chr(0x30 + i) for i in range(10)}    # 数字
+    mydict.update({chr(0xFF21 + i): chr(0x41 + i) for i in range(26)})  # 英大文字
+    mydict.update({chr(0xFF41 + i): chr(0x61 + i) for i in range(26)})  # 英小文字
+
+    input_sentence = input_sentence.translate(str.maketrans(mydict))
+    output_sentence = output_sentence.translate(str.maketrans(mydict))
+
+
     return input_sentence, output_sentence
 
 
