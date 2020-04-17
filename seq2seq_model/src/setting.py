@@ -1,6 +1,8 @@
 import os
 
-model_name = 'chatbot_ver11.0_general_pre追加_colab'       # モデル名
+model_name = 'chatbot_ver12_word2vec導入'  # モデル名
+WORD2DICT_CORPUS_FILE_DIR = "../word2vec_corpus/"
+WORD2DICT_CORPUS_FILE_NAME = "jawiki.all_vectors.200d_sharp_trimmed.txt"
 
 
 """データベース・辞書作成"""
@@ -24,13 +26,13 @@ LOAD_MODEL_EPOCH_NUM = 30000        # 途中から学習を始める際 or 会�
 
 
 """学習モード----------------------------------------------------------------------------"""
-IS_TRAIN_FROM_THE_MIDDLE = True     # 以前の続きから学習を再開するかどうか。
+IS_TRAIN_FROM_THE_MIDDLE = False     # 以前の続きから学習を再開するかどうか。
 
 
 
 """学習の調整用パラメータ。"""
 #Encoder, Decoderの設定
-hidden_size = 1000   # Embeddingのベクトル長
+hidden_size = 200   # Embeddingのベクトル長
 encoder_n_layers = 2
 decoder_n_layers = 2
 dropout = 0.1
@@ -54,10 +56,10 @@ teacher_forcing_ratio = 1.0 # 教師強制
 
 
 # epoch, batch関連
-iteration_num = 120000       # エポック数
+iteration_num = 50000       # エポック数
 save_every = 2000           # エポック何回ごとにセーブするのか。
 print_every = 100           # エポック何回ごとに結果の表示をするのか。
-batch_size = 32             # バッチサイズ
+batch_size = 64             # バッチサイズ
 
 
 

@@ -1,7 +1,7 @@
 import pickle
 
-load_file_name = "jawiki.all_vectors.300d_sharp_trimmed"
-save_file_name = 'jawiki.300d.word_list.pickle'
+load_file_name = "jawiki.all_vectors.200d_sharp_trimmed"
+save_file_name = 'jawiki.200d.word_list.pickle'
 
 
 def load_File(file_name):

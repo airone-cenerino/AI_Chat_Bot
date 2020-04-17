@@ -136,7 +136,6 @@ def trainIters(embedding, encoder, decoder, encoder_optimizer, decoder_optimizer
                 'en_opt': encoder_optimizer.state_dict(),
                 'de_opt': decoder_optimizer.state_dict(),
                 'loss': loss,
-                'embedding': embedding.state_dict()
             }, os.path.join(directory, '{}_{}.tar'.format(iteration, 'checkpoint')))
 
 

@@ -1,6 +1,6 @@
 import re
 
-file_name = "jawiki.all_vectors.300d"
+file_name = "jawiki.all_vectors.200d"
 
 
 def load_File(file_name):
