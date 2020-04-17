@@ -2,7 +2,8 @@ import re
 import pickle
 import MeCab
 
-data_file_names = ["ですよ！tweet2020-04-13", "ですよ！tweet2020-04-14", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
+data_file_names = ["あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "です。tweet2020-04-13", 
+                    "ですよ！tweet2020-04-13", "ですよ！tweet2020-04-14", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
 word2vec_corpus_file_name = "jawiki.300d.word_list.pickle"
 
 data_directory = "../before_preprocessing_data/"
@@ -11,7 +12,7 @@ save_directory = "../../seq2seq_model/corpus_data/"
 
 def wakati(sentence):
     m = MeCab.Tagger("-Owakati")
-    return m.parse(sentence)
+    return m.parse(sentence).rstrip()
 
 
 def load_pickle(file_name):
@@ -88,7 +89,6 @@ def main_loop(data_file_name, wiki_corpus):
 
             for word in wakatied_input.split(" "):
                 if not word in wiki_corpus:
-                    print(word)
                     save_flg = False
                     tmp+=1
                     break
@@ -97,7 +97,6 @@ def main_loop(data_file_name, wiki_corpus):
                 wakatied_output = wakati(output[i])
                 for word in wakatied_output.split(" "):
                     if not word in wiki_corpus:
-                        print(word)
                         save_flg = False
                         tmp+=1
                         break
@@ -107,8 +106,10 @@ def main_loop(data_file_name, wiki_corpus):
                     outFile.write(wakatied_output + "\n")
                     registered_pair_num += 1
 
+        print(data_file_name)
         print("wikiに無い単語を含んでおり、削除されたペア数:" + str(tmp))
         print("登録ペア数:" + str(registered_pair_num))
+        print()
 
 
 if __name__ == "__main__":
