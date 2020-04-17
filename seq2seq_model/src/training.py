@@ -55,9 +55,7 @@ def train_batch(input_variable, lengths, target_variable, mask, max_target_len, 
     # Forward batch of sequences through decoder one time step at a time
     if use_teacher_forcing:
         for t in range(max_target_len):
-            decoder_output, decoder_hidden = decoder(
-                decoder_input, decoder_hidden, encoder_outputs
-            )
+            decoder_output, decoder_hidden = decoder(decoder_input, decoder_hidden, encoder_outputs)
             # Teacher forcing: next input is current target
             decoder_input = target_variable[t].view(1, -1)
             # Calculate and accumulate loss

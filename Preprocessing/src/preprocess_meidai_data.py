@@ -1,15 +1,23 @@
 import re
+import pickle
 import MeCab
 
 data_directory = "../before_preprocessing_data/"
-save_directory = "../../seq2seq_model/corpus_data/after_preprocessing_data/"
+save_directory = "../../seq2seq_model/corpus_data/"
 
 data_file_name = "meidai"
+word2vec_corpus_file_name = "jawiki.300d.word_list.pickle"
+
 
 
 def wakati(sentence):
     m = MeCab.Tagger("-Owakati")
-    return m.parse(sentence)
+    return m.parse(sentence).rstrip()
+
+def load_pickle(file_name):
+    with open(file_name, mode='rb') as f:
+        data = pickle.load(f)
+        return data
 
 def load_File(file_name):
     file_data = []
@@ -42,6 +50,15 @@ def preprocess_sentence(input_sentence, output_sentence):
     if "【" in output_sentence:
         output_sentence = re.sub("【[^】]+】", "", output_sentence)
 
+    
+    # 全角英数字を半角英数字に置き換え。
+    mydict = {chr(0xFF10 + i): chr(0x30 + i) for i in range(10)}    # 数字
+    mydict.update({chr(0xFF21 + i): chr(0x41 + i) for i in range(26)})  # 英大文字
+    mydict.update({chr(0xFF41 + i): chr(0x61 + i) for i in range(26)})  # 英小文字
+
+    input_sentence = input_sentence.translate(str.maketrans(mydict))
+    output_sentence = output_sentence.translate(str.maketrans(mydict))
+    
     return input_sentence, output_sentence
 
 
@@ -59,18 +76,44 @@ def preprocess(input, output):
 
     return preprocessed_input, preprocessed_output
 
-import chardet
-if __name__ == "__main__":
+
+def load_files():
+    wiki_corpus = load_pickle(word2vec_corpus_file_name)
     input_file_name = data_directory + data_file_name + "_input.txt"
     output_file_name = data_directory + data_file_name + "_output.txt"
-
     input = load_File(input_file_name)
     output = load_File(output_file_name)
+
+    return wiki_corpus, input, output
+
+
+if __name__ == "__main__":
+    wiki_corpus, input, output = load_files()   # word2vecの単語リストと会話データのロード
 
     input, output = preprocess(input, output)
 
     with open(save_directory + data_file_name + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(save_directory + data_file_name + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
-        for sentence in input:
-            inFile.write(wakati(sentence))
-        for sentence in output:
-            outFile.write(wakati(sentence))
+        tmp = 0
+        for i in range(len(input)):
+            save_flg = True
+            wakatied_input = wakati(input[i])
+
+            for word in wakatied_input.split(" "):
+                if not word in wiki_corpus:
+                    print(word)
+                    save_flg = False
+                    tmp+=1
+                    break
+            
+            if save_flg:
+                wakatied_output = wakati(output[i])
+                for word in wakatied_output.split(" "):
+                    if not word in wiki_corpus:
+                        print(word)
+                        save_flg = False
+                        tmp+=1
+                        break
+
+                if save_flg:
+                    inFile.write(wakatied_input + "\n")
+                    outFile.write(wakatied_output + "\n")

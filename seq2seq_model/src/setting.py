@@ -1,6 +1,6 @@
 import os
 
-model_name = 'chatbot_ver11.0_general_pre追加'       # モデル名
+model_name = 'chatbot_ver11.0_general_pre追加_colab'       # モデル名
 
 
 """データベース・辞書作成"""
@@ -20,7 +20,7 @@ corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10",
 save_dir = "../trained_model_data"  # 学習モデルのセーブディレクトリ。
 corpus_name = "meidai_and_twitter"         # コーパス名
 
-LOAD_MODEL_EPOCH_NUM = 80000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
+LOAD_MODEL_EPOCH_NUM = 30000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
 
 
 """学習モード----------------------------------------------------------------------------"""
