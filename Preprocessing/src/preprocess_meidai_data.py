@@ -9,15 +9,16 @@ data_file_name = "meidai"
 word2vec_corpus_file_name = "jawiki.300d.word_list.pickle"
 
 
-
 def wakati(sentence):
     m = MeCab.Tagger("-Owakati")
     return m.parse(sentence).rstrip()
+
 
 def load_pickle(file_name):
     with open(file_name, mode='rb') as f:
         data = pickle.load(f)
         return data
+
 
 def load_File(file_name):
     file_data = []

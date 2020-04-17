@@ -1,7 +1,9 @@
 import re
+import pickle
 import MeCab
 
 data_file_names = ["ですよ！tweet2020-04-13", "ですよ！tweet2020-04-14", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
+word2vec_corpus_file_name = "jawiki.300d.word_list.pickle"
 
 data_directory = "../before_preprocessing_data/"
 save_directory = "../../seq2seq_model/corpus_data/"
@@ -10,6 +12,13 @@ save_directory = "../../seq2seq_model/corpus_data/"
 def wakati(sentence):
     m = MeCab.Tagger("-Owakati")
     return m.parse(sentence)
+
+
+def load_pickle(file_name):
+    with open(file_name, mode='rb') as f:
+        data = pickle.load(f)
+        return data
+
 
 def load_File(file_name):
     file_data = []
@@ -48,22 +57,53 @@ def preprocess(input, output):
     return preprocessed_input, preprocessed_output
 
 
-def main_loop(data_file_name):
+def load_files(data_file_name):
     input_file_name = data_directory + data_file_name + "_input.txt"
     output_file_name = data_directory + data_file_name + "_output.txt"
-
     input = load_File(input_file_name)
     output = load_File(output_file_name)
 
-    input, output = preprocess(input, output)
+    return input, output
+
+def main_loop(data_file_name, wiki_corpus):
+    input, output = load_files(data_file_name)  # 会話データのロード
+    input, output = preprocess(input, output)   # 1対1の会話になるように前処理。
 
     with open(save_directory + data_file_name + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(save_directory + data_file_name + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
-        for sentence in input:
-            inFile.write(wakati(sentence))
-        for sentence in output:
-            outFile.write(wakati(sentence))
+        tmp = 0
+        registered_pair_num = 0
+
+        for i in range(len(input)):
+            save_flg = True
+            wakatied_input = wakati(input[i])
+
+            for word in wakatied_input.split(" "):
+                if not word in wiki_corpus:
+                    print(word)
+                    save_flg = False
+                    tmp+=1
+                    break
+            
+            if save_flg:
+                wakatied_output = wakati(output[i])
+                for word in wakatied_output.split(" "):
+                    if not word in wiki_corpus:
+                        print(word)
+                        save_flg = False
+                        tmp+=1
+                        break
+
+                if save_flg:
+                    inFile.write(wakatied_input + "\n")
+                    outFile.write(wakatied_output + "\n")
+                    registered_pair_num += 1
+
+        print("wikiに無い単語を含んでおり、削除されたペア数:" + str(tmp))
+        print("登録ペア数:" + str(registered_pair_num))
 
 
 if __name__ == "__main__":
+    wiki_corpus = load_pickle(word2vec_corpus_file_name)
+
     for data_file_name in data_file_names:
-        main_loop(data_file_name)
+        main_loop(data_file_name, wiki_corpus)
