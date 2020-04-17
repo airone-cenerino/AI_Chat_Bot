@@ -71,6 +71,9 @@ def preprocess(input, output):
         if "＊" in input[i] or "＊" in output[i]: continue
 
         preprocessed_input_sentence, preprocessed_output_sentence = preprocess_sentence(input[i], output[i])
+        if preprocessed_input_sentence == "" or preprocessed_output_sentence == "":
+            continue
+
         preprocessed_input.append(preprocessed_input_sentence)
         preprocessed_output.append(preprocessed_output_sentence)
 
@@ -93,6 +96,8 @@ if __name__ == "__main__":
 
     input, output = preprocess(input, output)
 
+
+
     with open(save_directory + data_file_name + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(save_directory + data_file_name + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
         tmp = 0
         for i in range(len(input)):
@@ -101,7 +106,7 @@ if __name__ == "__main__":
 
             for word in wakatied_input.split(" "):
                 if not word in wiki_corpus:
-                    print(word)
+                    #print(word)
                     save_flg = False
                     tmp+=1
                     break
@@ -110,7 +115,7 @@ if __name__ == "__main__":
                 wakatied_output = wakati(output[i])
                 for word in wakatied_output.split(" "):
                     if not word in wiki_corpus:
-                        print(word)
+                        #print(word)
                         save_flg = False
                         tmp+=1
                         break
