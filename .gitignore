@@ -2,6 +2,7 @@
 /seq2seq_model/database_dict_data/*
 /seq2seq_model/corpus_data/*
 /seq2seq_model/src/__pycache__/*
+/seq2seq_model/word2vec_corpus/jawiki.all_vectors.200d_sharp_trimmed.txt
 !/seq2seq_model/corpus_data/sentence2wakati.py
 
 /TwitterCrawl/tweet/*

@@ -31,4 +31,4 @@ if __name__ == "__main__":
 
     with open(file_dir + save_corpus_file_name, "w", encoding="utf-8") as outFile:
         for word in word_list:
-            outFile.write(word + " " + ' '.join(map(str, word_vec_dict[word])))
+            outFile.write(word + " " + ' '.join(map(str, word_vec_dict[word])) + "\n")
