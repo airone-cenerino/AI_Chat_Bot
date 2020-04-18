@@ -11,7 +11,7 @@ class Dict:
         self.trimmed = False
         self.word2index = {}    # 単語からインデックスへの辞書
         self.word2count = {}    # 単語の出現数
-        self.index2word = {0: "PAD", 1: "SOS", 2: "EOS"}  # インデックスから単語への辞書
+        self.index2word = {0: "P_A_D", 1: "S_O_S", 2: "E_O_S"}  # インデックスから単語への辞書
         self.words_num = 3  # Count PAD, SOS and EOS　　　登録単語数
 
     # ペアの文を辞書に追加する。

@@ -30,9 +30,9 @@ if __name__ == "__main__":
             word_vec_dict[word] = vec
 
     with open(file_dir + save_corpus_file_name, "w", encoding="utf-8") as outFile:
-        outFile.write(str(len(word_list) + 3) + " 200")
+        outFile.write(str(len(word_list) + 3) + " 200\n")
 
-        default_word = ["PAD", "SOS", "EOS"]
+        default_word = ["P_A_D", "S_O_S", "E_O_S"]
         for word in default_word:
             outFile.write(word + " " + ' '.join(map(str, [0 for i in range(200)])) + "\n")
 

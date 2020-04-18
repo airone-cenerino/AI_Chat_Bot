@@ -55,6 +55,7 @@ def set_up_models(dict):
         encoder_sd, decoder_sd, encoder_optimizer_sd, decoder_optimizer_sd, embedding_sd, checkpoint = load_checkpoint()  # 学習途中のモデルの読み込み。
         embedding.load_state_dict(embedding_sd)
 
+
         encoder = network_model.EncoderRNN(setting.hidden_size, embedding, setting.encoder_n_layers, setting.dropout)
         decoder = network_model.LuongAttnDecoderRNN(setting.attn_model, embedding, setting.hidden_size, dict.words_num, setting.encoder_n_layers, setting.dropout)
 

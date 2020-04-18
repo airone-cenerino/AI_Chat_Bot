@@ -4,7 +4,7 @@ import model_manager
 import evaluate
 
 # モード切替-----------------------------------------
-TRAINING = True     # 学習ならTrue、会話モードならFalse
+TRAINING = False     # 学習ならTrue、会話モードならFalse
 #---------------------------------------------------
 
 

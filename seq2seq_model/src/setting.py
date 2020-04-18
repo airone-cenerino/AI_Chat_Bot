@@ -2,7 +2,7 @@ import os
 
 model_name = 'chatbot_ver12_word2vec導入'  # モデル名
 WORD2DICT_CORPUS_FILE_DIR = "../word2vec_corpus/"
-WORD2DICT_CORPUS_FILE_NAME = "jawiki.all_vectors.200d_sharp_trimmed.txt"
+WORD2DICT_CORPUS_FILE_NAME = "jawiki.all_vectors.200d_mycorpus.txt"
 
 
 """データベース・辞書作成"""
@@ -22,11 +22,11 @@ corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10",
 save_dir = "../trained_model_data"  # 学習モデルのセーブディレクトリ。
 corpus_name = "meidai_and_twitter"         # コーパス名
 
-LOAD_MODEL_EPOCH_NUM = 30000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
+LOAD_MODEL_EPOCH_NUM = 10000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
 
 
 """学習モード----------------------------------------------------------------------------"""
-IS_TRAIN_FROM_THE_MIDDLE = False     # 以前の続きから学習を再開するかどうか。
+IS_TRAIN_FROM_THE_MIDDLE = True     # 以前の続きから学習を再開するかどうか。
 
 
 
