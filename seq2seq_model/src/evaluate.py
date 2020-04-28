@@ -52,7 +52,7 @@ def evaluateInput(encoder, decoder, searcher, voc):
             output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
 
             #print(len(output_words))
-            #print(output_words)
+            print(output_words)
             print('Bot:', end="")
             for word in output_words:
                 if word == "。" or word == "！" or word =="？"or "。" in word:
