@@ -2,11 +2,11 @@ import re
 import pickle
 import MeCab
 
-data_directory = "../before_preprocessing_data/"
-save_directory = "../../seq2seq_model/corpus_data/"
+DATA_DIRECTORY = "../before_preprocessing_data/"
+SAVE_DIRECTORY = "../../seq2seq_model/corpus_data/"
 
-data_file_name = "meidai"
-word2vec_corpus_file_name = "jawiki.300d.word_list.pickle"
+DATA_FILE_NAME = "meidai"
+WORD2VEC_CORPUS_FILE_NAME = "jawiki.200d.word_list.pickle"
 
 
 def wakati(sentence):
@@ -63,6 +63,16 @@ def preprocess_sentence(input_sentence, output_sentence):
     return input_sentence, output_sentence
 
 
+def load_files():
+    wiki_corpus = load_pickle(WORD2VEC_CORPUS_FILE_NAME)
+    input_file_name = DATA_DIRECTORY + DATA_FILE_NAME + "_input.txt"
+    output_file_name = DATA_DIRECTORY + DATA_FILE_NAME + "_output.txt"
+    input = load_File(input_file_name)
+    output = load_File(output_file_name)
+
+    return wiki_corpus, input, output
+
+
 def preprocess(input, output):
     preprocessed_input = []
     preprocessed_output = []
@@ -76,31 +86,18 @@ def preprocess(input, output):
 
         preprocessed_input.append(preprocessed_input_sentence)
         preprocessed_output.append(preprocessed_output_sentence)
+        print(preprocessed_input_sentence)
+        print(preprocessed_output_sentence)
+        print()
 
 
     return preprocessed_input, preprocessed_output
 
 
-def load_files():
-    wiki_corpus = load_pickle(word2vec_corpus_file_name)
-    input_file_name = data_directory + data_file_name + "_input.txt"
-    output_file_name = data_directory + data_file_name + "_output.txt"
-    input = load_File(input_file_name)
-    output = load_File(output_file_name)
-
-    return wiki_corpus, input, output
-
-
-if __name__ == "__main__":
-    wiki_corpus, input, output = load_files()   # word2vecの単語リストと会話データのロード
-
-    input, output = preprocess(input, output)
-
-
-
-    with open(save_directory + data_file_name + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(save_directory + data_file_name + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
+def save_pairs(wiki_corpus, input, output):
+    with open(SAVE_DIRECTORY + DATA_FILE_NAME + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(SAVE_DIRECTORY + DATA_FILE_NAME + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
         tmp = 0
-        for i in range(len(input)):
+        for i in range(len(input)): # 1対ずつ保存していく。
             save_flg = True
             wakatied_input = wakati(input[i])
 
@@ -123,3 +120,9 @@ if __name__ == "__main__":
                 if save_flg:
                     inFile.write(wakatied_input + "\n")
                     outFile.write(wakatied_output + "\n")
+
+
+if __name__ == "__main__":
+    wiki_corpus, input, output = load_files()   # word2vecの単語リストと会話データのロード
+    input, output = preprocess(input, output)   # 文の前処理
+    #save_pairs(wiki_corpus, input, output)      # 保存

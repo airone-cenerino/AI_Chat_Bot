@@ -2,12 +2,12 @@ import re
 import pickle
 import MeCab
 
-data_file_names = ["あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "です。tweet2020-04-13", 
+DATA_FILE_NAMES = ["あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "です。tweet2020-04-13", 
                     "ですよ！tweet2020-04-13", "ですよ！tweet2020-04-14", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
-word2vec_corpus_file_name = "jawiki.300d.word_list.pickle"
+WORD2VEC_CORPUS_FILE_NAME = "jawiki.200d.word_list.pickle"
 
-data_directory = "../before_preprocessing_data/"
-save_directory = "../../seq2seq_model/corpus_data/"
+DATA_DIRECTORY = "../before_preprocessing_data/"
+SAVE_DIRECTORY = "../../seq2seq_model/corpus_data/"
 
 
 def wakati(sentence):
@@ -68,8 +68,8 @@ def preprocess(input, output):
 
 
 def load_files(data_file_name):
-    input_file_name = data_directory + data_file_name + "_input.txt"
-    output_file_name = data_directory + data_file_name + "_output.txt"
+    input_file_name = DATA_DIRECTORY + data_file_name + "_input.txt"
+    output_file_name = DATA_DIRECTORY + data_file_name + "_output.txt"
     input = load_File(input_file_name)
     output = load_File(output_file_name)
 
@@ -79,7 +79,7 @@ def main_loop(data_file_name, wiki_corpus):
     input, output = load_files(data_file_name)  # 会話データのロード
     input, output = preprocess(input, output)   # 1対1の会話になるように前処理。
 
-    with open(save_directory + data_file_name + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(save_directory + data_file_name + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
+    with open(SAVE_DIRECTORY + data_file_name + "_preprocessed_input.txt", "w", encoding="utf-8") as inFile, open(SAVE_DIRECTORY + data_file_name + "_preprocessed_output.txt", "w", encoding="utf-8") as outFile:
         tmp = 0
         registered_pair_num = 0
 
@@ -113,7 +113,7 @@ def main_loop(data_file_name, wiki_corpus):
 
 
 if __name__ == "__main__":
-    wiki_corpus = load_pickle(word2vec_corpus_file_name)
+    wiki_corpus = load_pickle(WORD2VEC_CORPUS_FILE_NAME)
 
-    for data_file_name in data_file_names:
+    for data_file_name in DATA_FILE_NAMES:
         main_loop(data_file_name, wiki_corpus)
