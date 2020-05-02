@@ -1,6 +1,6 @@
 import os
 
-model_name = 'chatbot_ver12_word2vec導入'  # モデル名
+model_name = 'chatbot_ver13'  # モデル名
 WORD2DICT_CORPUS_FILE_DIR = "../word2vec_corpus/"
 WORD2DICT_CORPUS_FILE_NAME = "jawiki.all_vectors.200d_mycorpus.txt"
 
@@ -10,10 +10,10 @@ DATABASE_DICT_SAVE_DIR = "../database_dict_data/" + model_name
 DATABASE_DICT_SAVE_FILE_NAME = "database_dict.tar"
 
 TRIMMED_WORD_MAX_OCCURENCE_NUM = 5  # 辞書から削除しない単語の最小出現数
-MAX_SENTENCE_LENGTH = 20  # 1文の最大単語数 この値より長い文は使わない。
+MAX_SENTENCE_LENGTH = 25  # 1文の最大単語数 この値より長い文は使わない。
 
 # コーパスファイル名
-corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "です。tweet2020-04-13",
+corpus_data_names = ["あるtweet2020-04-09", "あるtweet2020-04-10", "です。tweet2020-04-09", "です。tweet2020-04-10", "です。tweet2020-04-11", "です。tweet2020-04-13",
                         "ですよ！tweet2020-04-13", "ですよ！tweet2020-04-14", "私tweet2020-04-09", "私はtweet2020-04-11", "私はtweet2020-04-12"]
 
 
@@ -22,7 +22,7 @@ corpus_data_names = ["meidai", "あるtweet2020-04-09", "あるtweet2020-04-10",
 save_dir = "../trained_model_data"  # 学習モデルのセーブディレクトリ。
 corpus_name = "meidai_and_twitter"         # コーパス名
 
-LOAD_MODEL_EPOCH_NUM = 75000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
+LOAD_MODEL_EPOCH_NUM = 690000        # 途中から学習を始める際 or 会話モードで使う 学習済みモデルのエポック数。
 
 
 """学習モード----------------------------------------------------------------------------"""
@@ -32,7 +32,7 @@ IS_TRAIN_FROM_THE_MIDDLE = True     # 以前の続きから学習を再開する
 
 """学習の調整用パラメータ。"""
 #Encoder, Decoderの設定
-hidden_size = 200   # Embeddingのベクトル長
+hidden_size = 203   # Embeddingのベクトル長
 encoder_n_layers = 2
 decoder_n_layers = 2
 dropout = 0.1
